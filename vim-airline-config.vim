@@ -54,7 +54,7 @@ let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_hea
 " Extensions & Linter integration
 let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#syntastic#enabled = 0
-let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#enabled = 0
 let g:airline#extensions#lsp#enabled = 0
 let g:airline#extensions#whitespace#enabled = 1
 
