@@ -1,9 +1,18 @@
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format)
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format)
 
-augroup FormatNotice
+let s:fmt = '*.js,*.jsx,*.ts,*.tsx,*.json,*.css,*.md,*.java,*.py,*.c,*.cpp'
+
+function! FormatNotice() abort
+  redraw
+  echo 'formatted: ' . expand('%:t')
+  call timer_start(2000, {-> execute('echo ""', '')})
+endfunction
+
+augroup FormatOnSave
   autocmd!
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.json,*.css,*.md,*.py let b:tick_before = b:changedtick
-  " autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.json,*.css,*.md,*.py if b:changedtick != b:tick_before | echom 'Formatted: ' . expand('%:t') | endif
+  execute 'autocmd BufWritePre ' . s:fmt . ' let b:tick_before = b:changedtick'
+  autocmd BufWritePre *.py silent! call CocAction('runCommand', 'ruff.executeAutofix')
+  execute 'autocmd BufWritePre ' . s:fmt . ' silent! call CocAction("format")'
+  execute 'autocmd BufWritePost ' . s:fmt . ' if b:changedtick != get(b:, "tick_before", b:changedtick) | call FormatNotice() | endif'
 augroup END
-
