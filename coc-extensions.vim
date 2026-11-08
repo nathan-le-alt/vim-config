@@ -11,6 +11,7 @@ let g:coc_global_extensions = [
   \ '@yaegassy/coc-ruff',
   \ 'coc-html',
   \ 'coc-css',
+  \ 'coc-java',
   \ 'coc-prettier',
   \ 'coc-highlight'
   \ ]
