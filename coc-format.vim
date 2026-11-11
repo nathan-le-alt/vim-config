@@ -5,7 +5,7 @@ let s:fmt = '*.js,*.jsx,*.ts,*.tsx,*.json,*.css,*.md,*.java,*.py,*.c,*.cpp'
 
 function! FormatNotice() abort
   redraw
-  echo 'formatted: ' . expand('%:t')
+  echo '[code formatter] Formatted: ' . expand('%:t')
   call timer_start(2000, {-> execute('echo ""', '')})
 endfunction
 
